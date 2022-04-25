@@ -7,6 +7,27 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  modes = ['date', 'date-time', 'month', 'month-year', 'time', 'time-date', 'year'];
+  selectedMode = 'date';
+
+  constructor() { }
+
+  ionViewDidEnter() {
+    console.log(this.selectedMode);
+
+  }
+  onChange(event) {
+    console.log(event);
+
+  }
+
+  segmentChanged(event) {
+    console.log(event);
+
+  }
+
+  // presentationChange(){
+  //   this.selectedMode
+  // }
 
 }
