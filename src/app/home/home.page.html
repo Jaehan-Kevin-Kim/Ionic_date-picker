@@ -5,9 +5,8 @@
     </ion-title>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="selectedMode" #item
-      (ngModelChange)="onChange($event)" scrollable>
-      <ion-segment-button *ngFor="let mode of modes">
+    <ion-segment [(ngModel)]="selectedMode" #item scrollable>
+      <ion-segment-button [value]="mode" *ngFor="let mode of modes">
         <ion-label>{{mode}}</ion-label>
       </ion-segment-button>
     </ion-segment>
@@ -15,6 +14,32 @@
 </ion-header>
 
 <ion-content>
-  <ion-datetime [presentation]="selectedMode"></ion-datetime>
+  <!-- <ion-item (click)="showPicker = !showPicker">
+    <ion-label>Date</ion-label>
+    <ion-text slot="end">
+      {{ formattedString }}
+    </ion-text>
+  </ion-item>
+  <ion-datetime #datetime size="cover" *ngIf="showPicker" [value]="dateValue" showDefaultButtons="true"
+    (ionChange)="dateChanged(datetime.value)" (ionCancel)="showPicker = false">
+  </ion-datetime> -->
+
+  <ion-item id="open-modal">
+    <ion-icon slot="start" color="primary" name="calendar-outline"></ion-icon>
+    <ion-label>Pick date</ion-label>
+    <ion-text slot="end">{{formattedString}}
+    </ion-text>
+  </ion-item>
+
+  <ion-modal trigger="open-modal">
+    <ng-template>
+      <ion-content>
+        <ion-datetime #datetime size="cover" [value]="dateValue" showDefaultButtons="true"
+          (ionChange)="dateChanged(datetime.value)" (ionCancel)="showPicker = false">
+        </ion-datetime>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
 
 </ion-content>
